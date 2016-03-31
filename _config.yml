@@ -6,7 +6,7 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: MyBlog
+title: _(:3」∠)_
 description: '' # write a nice description for your blog
 baseurl: '' # the subpath of your site, e.g. /blog
 url: '' # the base hostname & protocol for your site http://www.example.com
@@ -15,7 +15,9 @@ url: '' # the base hostname & protocol for your site http://www.example.com
 encoidng: utf-8
 # Build settings
 markdown: kramdown
-highlighter: rouge
+kramdown: 
+  input: GFM
+  highlighter: rouge
 #permalink: '/:title/'
 
 #gems: [jekyll-paginate]
