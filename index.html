@@ -2,29 +2,16 @@
 layout: default
 ---
 
-    <nav class="blue-grey darken-1">
-    <div class="container">
-      <div class="nav-wrapper">
+<div class="container">
+    <div class="row">
+    <div class="col m8">
         <ul>
-          <li><a href="#">Android</a></li>
-          <li><a href="#">Web</a></li>
-          <li><a href="#">Others</a></li>
-          <li class="right"><a href="about.html">About</a></li>
+        {% for post in site.posts %}
+            <li>
+            <a href="{{post.url}}">{{post.excerpt}}</a>
+            </li>
+        {% endfor %}
         </ul>
-      </div>
     </div>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col m8">
-          <ul>
-            {% for post in site.posts %}
-              <li>
-                <a href="{{post.url}}">{{post.excerpt}}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
     </div>
+</div>

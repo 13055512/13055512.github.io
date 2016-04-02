@@ -2,7 +2,95 @@
  * Materialize v0.97.1 (http://materializecss.com)
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
+ * ======================================================
+ * add .highlighter-rouge .highlight
+ * add font-family at <pre> : consolas
+ * add font-family at <body>
+ * change <p> color
+ * change <h2>, <h3> fontsize
  */
+ p {
+     color: #4f5759
+ }
+ 
+ .highlighter-rouge {
+    border: 1px solid #E0E0E0;
+    margin: 0.5rem 0 1rem 0;
+    border: 1px solid #E0E0E0;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+pre.highlight {
+    background-color: #fff;
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+}
+.highlighter-rouge .highlight .hll { background-color: #ffffcc }
+.highlighter-rouge .highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlighter-rouge .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlighter-rouge .highlight .k { font-weight: bold } /* Keyword */
+.highlighter-rouge .highlight .o { font-weight: bold } /* Operator */
+.highlighter-rouge .highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlighter-rouge .highlight .cp { color: #999999; font-weight: bold } /* Comment.Preproc */
+.highlighter-rouge .highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlighter-rouge .highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlighter-rouge .highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlighter-rouge .highlight .ge { font-style: italic } /* Generic.Emph */
+.highlighter-rouge .highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlighter-rouge .highlight .gh { color: #999999 } /* Generic.Heading */
+.highlighter-rouge .highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlighter-rouge .highlight .go { color: #888888 } /* Generic.Output */
+.highlighter-rouge .highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlighter-rouge .highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlighter-rouge .highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlighter-rouge .highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlighter-rouge .highlight .kc { font-weight: bold } /* Keyword.Constant */
+.highlighter-rouge .highlight .kd { font-weight: bold } /* Keyword.Declaration */
+.highlighter-rouge .highlight .kn { font-weight: bold } /* Keyword.Namespace */
+.highlighter-rouge .highlight .kp { font-weight: bold } /* Keyword.Pseudo */
+.highlighter-rouge .highlight .kr { font-weight: bold } /* Keyword.Reserved */
+.highlighter-rouge .highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlighter-rouge .highlight .m { color: #009999 } /* Literal.Number */
+.highlighter-rouge .highlight .s { color: #bb8844 } /* Literal.String */
+.highlighter-rouge .highlight .na { color: #008080 } /* Name.Attribute */
+.highlighter-rouge .highlight .nb { color: #999999 } /* Name.Builtin */
+.highlighter-rouge .highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlighter-rouge .highlight .no { color: #008080 } /* Name.Constant */
+.highlighter-rouge .highlight .ni { color: #800080 } /* Name.Entity */
+.highlighter-rouge .highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlighter-rouge .highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlighter-rouge .highlight .nn { color: #555555 } /* Name.Namespace */
+.highlighter-rouge .highlight .nt { color: #000080 } /* Name.Tag */
+.highlighter-rouge .highlight .nv { color: #008080 } /* Name.Variable */
+.highlighter-rouge .highlight .ow { font-weight: bold } /* Operator.Word */
+.highlighter-rouge .highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlighter-rouge .highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlighter-rouge .highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlighter-rouge .highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlighter-rouge .highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlighter-rouge .highlight .sb { color: #bb8844 } /* Literal.String.Backtick */
+.highlighter-rouge .highlight .sc { color: #bb8844 } /* Literal.String.Char */
+.highlighter-rouge .highlight .sd { color: #bb8844 } /* Literal.String.Doc */
+.highlighter-rouge .highlight .s2 { color: #bb8844 } /* Literal.String.Double */
+.highlighter-rouge .highlight .se { color: #bb8844 } /* Literal.String.Escape */
+.highlighter-rouge .highlight .sh { color: #bb8844 } /* Literal.String.Heredoc */
+.highlighter-rouge .highlight .si { color: #bb8844 } /* Literal.String.Interpol */
+.highlighter-rouge .highlight .sx { color: #bb8844 } /* Literal.String.Other */
+.highlighter-rouge .highlight .sr { color: #808000 } /* Literal.String.Regex */
+.highlighter-rouge .highlight .s1 { color: #bb8844 } /* Literal.String.Single */
+.highlighter-rouge .highlight .ss { color: #bb8844 } /* Literal.String.Symbol */
+.highlighter-rouge .highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlighter-rouge .highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlighter-rouge .highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlighter-rouge .highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlighter-rouge .highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+ /*
+ * above is new
+ */
+ 
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
@@ -1660,6 +1748,9 @@ html {
  * Remove default margin.
  */
 body {
+  font-family: "WenQuanYi Micro Hei", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans",
+   "Open Sans", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Wenquanyi Micro Hei",
+   "WenQuanYi Zen Hei", "Microsoft YaHei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   margin: 0; }
 
 /* HTML5 display definitions
@@ -1808,7 +1899,7 @@ pre {
  * Address odd `em`-unit font size rendering in all browsers.
  */
 code, kbd, pre, samp {
-  font-family: monospace, monospace;
+  font-family: "consolas", monospace, monospace;
   font-size: 1em; }
 
 /* Forms
@@ -2197,13 +2288,13 @@ table {
     background-color: #f2f2f2; }
   table.striped > tbody > tr > td {
     border-radius: 0px; }
-  table.highlight > tbody > tr {
+  table .highlight > tbody > tr {
     -webkit-transition: background-color .25s ease;
     -moz-transition: background-color .25s ease;
     -o-transition: background-color .25s ease;
     -ms-transition: background-color .25s ease;
     transition: background-color .25s ease; }
-    table.highlight > tbody > tr:hover {
+    table .highlight > tbody > tr:hover {
       background-color: #f2f2f2; }
   table.centered thead tr th, table.centered tbody tr td {
     text-align: center; }
@@ -5432,27 +5523,27 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: inherit; }
 
 h1 {
-  font-size: 4.2rem;
+  font-size: 2.1rem;
   line-height: 110%;
   margin: 2.1rem 0 1.68rem 0; }
 
 h2 {
-  font-size: 3.56rem;
+  font-size: 2.0rem;
   line-height: 110%;
   margin: 1.78rem 0 1.424rem 0; }
 
 h3 {
-  font-size: 2.92rem;
+  font-size: 1.5rem;
   line-height: 110%;
   margin: 1.46rem 0 1.168rem 0; }
 
 h4 {
-  font-size: 2.28rem;
+  font-size: 1.4rem;
   line-height: 110%;
   margin: 1.14rem 0 0.912rem 0; }
 
 h5 {
-  font-size: 1.64rem;
+  font-size: 1.2rem;
   line-height: 110%;
   margin: 0.82rem 0 0.656rem 0; }
 
