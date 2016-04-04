@@ -9,22 +9,26 @@
  * change <p> color
  * change <h2>, <h3> fontsize
  */
+ h1, h2 {
+     font-weight: bold;
+     line-height: 1.1;
+ }
  p {
      color: #4f5759
  }
  
  .highlighter-rouge {
-    border: 1px solid #E0E0E0;
+    padding: 0px 4px;
     margin: 0.5rem 0 1rem 0;
     border: 1px solid #E0E0E0;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
+    background-color: #F9F9F9;
 }
 pre.highlight {
-    background-color: #fff;
     line-height: 1.5rem;
-    padding: 10px 20px;
+    padding: 10px 15px;
     margin: 0;
 }
 .highlighter-rouge .highlight .hll { background-color: #ffffcc }
@@ -1899,7 +1903,7 @@ pre {
  * Address odd `em`-unit font size rendering in all browsers.
  */
 code, kbd, pre, samp {
-  font-family: "consolas", monospace, monospace;
+  font-family: Consolas, monospace;
   font-size: 1em; }
 
 /* Forms
@@ -2122,9 +2126,13 @@ ul {
   background-color: #e0e0e0; }
 
 blockquote {
-  margin: 20px 0;
+  /*margin: 20px 0;
   padding-left: 1.5rem;
-  border-left: 5px solid #ee6e73; }
+  border-left: 5px solid #ee6e73; */
+  padding: .2rem 1rem;
+  margin: .8rem 0;
+  color: #7a7a7a;
+  border-left: .25rem solid #B1DCFB;}
 
 i {
   line-height: inherit; }
@@ -5515,7 +5523,7 @@ html {
     html {
       font-size: 15px; } }
 
-h1, h2, h3, h4, h5, h6 {
+h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.1; }
 
