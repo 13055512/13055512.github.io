@@ -8,16 +8,46 @@
  * add font-family at <body>
  * change <p> color
  * change <h2>, <h3> fontsize
+ * change blockquote
+ * change ul, li
  */
  h1, h2 {
      font-weight: bold;
      line-height: 1.1;
  }
- p {
+ p, li{
      color: #4f5759
  }
+  
+ul {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 30px;
+}
+
+ul li {
+list-style-type: inherit; 
+}
+
+ ul ul, ol ol {
+     list-style-type: circle;
+ }
+ blockquote p {
+     color: #818B8E;
+ }
+ code.highlighter-rouge {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border-radius: 4px;
+}
  
- .highlighter-rouge {
+ div.highlighter-rouge {
     padding: 0px 4px;
     margin: 0.5rem 0 1rem 0;
     border: 1px solid #E0E0E0;
@@ -26,6 +56,7 @@
     position: relative;
     background-color: #F9F9F9;
 }
+
 pre.highlight {
     line-height: 1.5rem;
     padding: 10px 15px;
@@ -2066,9 +2097,6 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
-ul {
-  list-style-type: none; }
-
 a {
   color: #039be5;
   text-decoration: none;
@@ -2087,10 +2115,6 @@ a {
   .valign-wrapper .valign {
     display: block; }
 
-ul {
-  padding: 0; }
-  ul li {
-    list-style-type: none; }
 
 .clearfix {
   clear: both; }
@@ -2129,7 +2153,7 @@ blockquote {
   /*margin: 20px 0;
   padding-left: 1.5rem;
   border-left: 5px solid #ee6e73; */
-  padding: .2rem 1rem;
+  padding: 0rem 1rem;
   margin: .8rem 0;
   color: #7a7a7a;
   border-left: .25rem solid #B1DCFB;}
@@ -5419,7 +5443,8 @@ nav {
       right: 0.5rem;
       padding: 0; }
   nav ul {
-    margin: 0; }
+    margin: 0; 
+    list-style-type: none;}
     nav ul li {
       -webkit-transition: background-color .3s;
       -moz-transition: background-color .3s;
