@@ -33,6 +33,10 @@ ul li {
 list-style-type: inherit; 
 }
 
+nav ul{
+    padding: 0px
+}
+
  ul ul, ol ol {
      list-style-type: circle;
  }
