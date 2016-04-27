@@ -11,6 +11,11 @@
  * change blockquote
  * change ul, li
  */
+
+.chip {
+  margin-bottom: 6px;
+}
+ 
  h1, h2 {
      font-weight: bold;
      line-height: 1.1;

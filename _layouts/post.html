@@ -9,6 +9,15 @@
     <div class="row">
       <div class="col m9 s12">
         {{ content }}
+        {% include comments.html %}
+      </div>
+      <div class="col m3">
+        <h2>Time</h2>
+        <div class="chip">2016/04</div>
+        <h2>Tags</h2>
+        {% for tag in page.tags %}
+        <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
+        {% endfor %}
       </div>
     </div>
     </div>

@@ -10,8 +10,8 @@ title: _(:3」∠)_
 description: '' # write a nice description for your blog
 baseurl: '' # the subpath of your site, e.g. /blog
 url: '' # the base hostname & protocol for your site http://www.example.com
-# google_analytics: 'UA-XXXXXX-X'
-#twitter_username: 'twitter_username'
+google_analytics: 'UA-72318437-2'
+github_username: 'gunag2'
 encoidng: utf-8
 # Build settings
 markdown: kramdown

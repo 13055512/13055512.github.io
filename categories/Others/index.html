@@ -1,0 +1,19 @@
+---
+layout: default
+title: Others
+---
+
+<div class="container">
+    <div class="row">
+    <div class="col m8">
+        <ul>
+        {% for post in site.categories.Others %}
+            <li>
+            <a href="{{post.url}}">
+                {{post.excerpt}}</a> 
+            </li>        
+        {% endfor %}
+        </ul>
+    </div>
+    </div>
+</div>
