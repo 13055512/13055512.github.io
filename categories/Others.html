@@ -1,14 +1,15 @@
 ---
 layout: default
-title: Web
+title: Others
+permalink: /Others/
 ---
 
 <div class="container">
     <div class="row">
-    <div class="col m9">
-        <h2>Category: Web</h2>
+    <div class="col m9 s12">
+        <h2>Category: Others</h2>
         <div id="coll" class="collection">   
-          {% for post in site.categories.Web %}
+          {% for post in site.categories.Others %}
           <a class='collection-item' href="{{ post.url }}" target=_blank >{{ post.title }}
               <span class='badge'>
               {% for tag in post.tags %}

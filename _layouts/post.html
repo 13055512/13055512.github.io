@@ -3,37 +3,34 @@
 
   {% include head.html %}
 
-  <body>
+<body>
     {% include nav.html %}
     <div class="container">
     <div class="row">
-      <div class="col m9 s12">
-        {{ content }}
-        <div class="hide-on-med-and-up">
-        <h3>Tags</h3>
-        {% for tag in page.tags %}
-        <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
-        {% endfor %}
+        <div class="col m8 s12">
+            {{ content }}
+            <div class="hide-on-med-and-up">
+            <h3>Tags</h3>
+            {% for tag in page.tags %}
+            <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
+            {% endfor %}
+            </div>
+            {% include comments.html %}
         </div>
-        {% include comments.html %}
+        <div class="col m3 offset-m1 hide-on-med-and-down">
+            <ul id='content' class='section table-of-contents'>
+
+            </ul>
+            <!--<h2 class="null">Time</h2>
+            <button class="btn" id="test">Test</button>-->
+            <h2 class="null">Tags</h2>
+            {% for tag in page.tags %}
+            <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
+            {% endfor %}
+        </div>
       </div>
-      <div class="col m3 hide-on-med-and-down">
-        <ul class='section table-of-contents'>
-            <li><a class='active'>测试</a></li>
-            <li><a >前言</a></li>
-            <li><a >参考</a></li>
-            <li><a >Test</a></li>
-        </ul>
-        <h2 class="null">Time</h2>
-        <button class="btn" id="test">Test</button>
-        <h2 class="null">Tags</h2>
-        {% for tag in page.tags %}
-        <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
-        {% endfor %}
-      </div>
-    </div>
-    </div>
-  </body>
+  </div>
+</body>
 
     {% include scripts.html %}
 
