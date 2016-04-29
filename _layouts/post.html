@@ -18,9 +18,15 @@
         {% include comments.html %}
       </div>
       <div class="col m3 hide-on-med-and-down">
-        <h2>Time</h2>
-        <div class="chip">2016/04</div>
-        <h2>Tags</h2>
+        <ul class='section table-of-contents'>
+            <li><a class='active'>测试</a></li>
+            <li><a >前言</a></li>
+            <li><a >参考</a></li>
+            <li><a >Test</a></li>
+        </ul>
+        <h2 class="null">Time</h2>
+        <button class="btn" id="test">Test</button>
+        <h2 class="null">Tags</h2>
         {% for tag in page.tags %}
         <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
         {% endfor %}
