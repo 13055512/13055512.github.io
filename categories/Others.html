@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Others
-permalink: /Others/
+permalink: /others/
 ---
 
 <div class="container">
     <div class="row">
     <div class="col m9 s12">
         <h2>Category: Others</h2>
-        <div id="coll" class="collection">   
+        <div id="coll" class="collection">
           {% for post in site.categories.Others %}
           <a class='collection-item' href="{{ post.url }}" target=_blank >{{ post.title }}
               <span class='badge'>
@@ -17,7 +17,7 @@ permalink: /Others/
               {% endfor %}
               </span>
            </a>
-           {% endfor %}      
+           {% endfor %}
         </div>
     </div>
     </div>
