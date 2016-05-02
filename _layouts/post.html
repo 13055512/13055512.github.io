@@ -18,15 +18,15 @@
             {% include comments.html %}
         </div>
         <div class="col m3 offset-m1 hide-on-med-and-down">
-            <ul id='content' class='section table-of-contents'>
-
-            </ul>
             <!--<h2 class="null">Time</h2>
             <button class="btn" id="test">Test</button>-->
             <h2 class="null">Tags</h2>
             {% for tag in page.tags %}
             <a href="/tags/{{ tag }}"><div class="chip">{{ tag }}</div></a>
             {% endfor %}
+            <ul id='content' class='section table-of-contents'>
+
+            </ul>
         </div>
       </div>
   </div>
