@@ -71,10 +71,11 @@ public class MainActivity extends Activity {
 那我们该如何从工作线程更新 UI 呢？答案是，在 UI 线程中将将工作线程所要用的 UI 和相应的回调接口进行绑定，当工作线程完成后，通过回调接口进行 UI 的更新，同时若此时相应的 UI 已不存在，那这个相应的 work 就会被丢弃；若 Activity 重新初始过，也不会持有被丢弃的 work 的引用
 
 ![正确的更新UI](/assets/2016-05/useWorkRecords.png)
+
 ## 如何正确地使用线程
 
 ### Good AsyncTask Hunting
-![AsyncTask](/assets/2016-05/AsyncTask.png)
+![AsyncTask](/assets/2016-05/AsyncTask.png)  
 使用 AsyncTask 主要涉及到三个方法：`onPreExecute()`、`doInBackground()`、`onPostExecute()`，使用起来很容易，但在实际使用时还要考虑以下问题
 
 问题一：所有 AsyncTask 共享同一个线程，如果前面这个 AsyncTask 没有完成，后面的只能一直处于阻塞状态  
