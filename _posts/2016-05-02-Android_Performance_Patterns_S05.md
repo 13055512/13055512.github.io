@@ -9,6 +9,7 @@ tags: [Thread,Note]
 
 ## 前言
 这篇算是 [Android Performance Pattern 第5季](https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE)的笔记，内容主要涉及多线程的使用。本人接触 Android 的时间也不久，如有什么错误，希望能指出。
+
 ## Thread Performance
 线程操作是 Android 开发中的重要组成部分，想要尽可能使你的 App 能尽可能的流畅、迅捷，就自然需要理解并掌握。
 
