@@ -5,7 +5,16 @@ layout: default
 <div class="container">
     <div class="row">
     <div class="col m9 s12">
-        <h2>2016/04</h2>
+        <br/>
+        <a class="btn dropdown-button white-text blue-grey " style="margin:2px" data-activates='dropdown-year'><i class="material-icons left">today</i>2016</a>
+        <!-- Dropdown Structure -->
+        <ul id='dropdown-year' class='dropdown-content'>
+            <li><a href="#">2016</a></li>
+            <li class="divider"></li>
+            <li><a href="#">EOF</a></li>
+        </ul>
+        <a class="btn white-text z-depth-1" style="margin:2px">Apr</a>
+        <a class="btn white-text z-depth-1" style="margin:2px">May</a>
         <div id="coll" class="collection">   
           {% for post in site.posts %}
           <a class='collection-item' href="{{ post.url }}" target=_blank >{{ post.title }}

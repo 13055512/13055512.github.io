@@ -34,7 +34,7 @@ ul {
   -webkit-padding-start: 30px;
 }
 
-ul.section {
+ul.section, ul.dropdown-content {
   -webkit-padding-start: 0px;
   list-style-type: none; 
 }
