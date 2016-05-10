@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Crunching RxAndroid 系列
+title: Crunching RxAndroid 系列 | 译
 categories: Android
 tags: [RxJava, RxAndroid, 译]
 ---

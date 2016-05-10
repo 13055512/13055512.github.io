@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Chrome Custom Tabs【译】
+title: Chrome Custom Tabs | 译
 categories: Android
 tags: [Chrome, 译]
 ---
