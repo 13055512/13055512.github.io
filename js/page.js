@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('table').attr("class", "responsive-table");
     var hd = $('h2').not(".null");
     var num = hd.size();
     for (var i = 0; i < num; i++){
@@ -8,5 +9,5 @@ $(document).ready(function(){
         $('ul#content').append(text);
         hd.eq(i).attr("class", "section scrollspy");
     }
-    $('.scrollspy').scrollSpy();
+    //$('.scrollspy').scrollSpy();
 });
