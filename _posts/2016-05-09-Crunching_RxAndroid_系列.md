@@ -6,16 +6,16 @@ tags: [RxJava, RxAndroid, 译]
 ---
 
 # Crunching RxAndroid 系列【译】
-更新时间：2016-05-09
+更新时间：2016-05-16
 
 ## 前言
 原文链接：[Crunching RxAndroid](https://medium.com/crunching-rxandroid)  
-该系列现已更新到 Part 8，本文包含 Part 0～4
+该系列现已更新到 Part 8，本文包含 Part 0～8
 
 ## Hello World by RxJava
 举一个 'Hello World' 的例子，要是有一点了解的话就跳过吧。  
 首先，添加依赖(例子使用的版本号不是最新)
-  
+
 ```
 compile 'io.reactivex:rxandroid:0.24.0'
 ```  
@@ -264,6 +264,184 @@ Observable.from(softwarePackages)
     (thowable -> { /* on error */ }),
     (this::convertInstalledAppsListToVector) ));
 ```
+
+## Retrofit and RxJava
+// TODO
+
+## RxLifecycle
+RxJava 很好用，但如果不注意使用也会有风险，比如当 App 生命周期发生变化时，未完成的 subscriptions 可能会造成内存泄露。不过在 [RxLifecycle](https://github.com/trello/RxLifecycle) 的帮助下，这个将不再是问题。使用 RxLifecycle 需要继承 RxActivity, RxAppCompatActivity, RxFragment 这三者之一或选择提供一个 `Observable<ActivityEvent>` 或 `Observable<FragmentEvent>`
+
+无论你选择何种，最后实现起来是类似的。有了 RxLifecycle，我们的 Observable 的生命周期可以和 Activity 或 Fragment 的生命周期联系在一起。换句话说，如果我们在 onResume 阶段启动 Observable， RxLifecycle 将会保证这个 Observable 在 onPause 阶段取消 subscribe。如果还不太理解的话看下下面的栗子，反之就看下一节吧。
+
+### 一个栗子
+现在有这么一段程序，在 Activity 运行期间会一直打 Log，同时在 Activity 进入到 onPause 阶段时停止，另一方面，我们想办法让 Observable 在 Activity 处于活动时一直运行（废话讲太多了，还是直接看图吧）。可以在[这里](https://github.com/tiwiz/RxAndroidCrunch)找到全部代码
+
+```java
+Observable.interval(1, TimeUnit.SECONDS)
+    .observeOn(AndroidSchedulers.mainThread())
+    .subscribe(this::logOnNext,this::logOnError,this::logOnCompleted);
+```
+
+『The sun is rising!』表示进入 onPause 阶段,最后程序跑起来的样子：
+
+![效果图](/assets/2016-05/NoRxLifecycle.png)
+
+结果很明显， Observable 并没有及时地停止，这就是前面提到的我们在使用时需要注意的。
+
+下面自然是需要给出使用 RxLifecycle 后的结果，RxLifecycle 会在适当时机调用 onCompleted 方法来停止 Observable。
+
+```java
+// 首先要继承
+public class Part5Activity extends RxAppCompatActivity {}
+```
+为了绑定到生命周期，可以自动的或使用静态方法 `bindUntilActivityEvent`，这里我们就使用前者。
+
+```java
+Observable.interval(1, TimeUnit.SECONDS)
+    .observeOn(AndroidSchedulers.mainThread())
+    .compose(bindToLifecycle())
+    .subscribe(this::logOnNext, this::logOnError,this::logOnCompleted);
+```
+
+最后补张图
+
+![RxLifecycle is good!](/assets/2016-05/UseRxLifecycle.png)
+
+## RxBinding
+[RxBinding](https://github.com/JakeWharton/RxBinding)是 Jake Wharton 大神的作品。这部分讲的是绑定，道理我有点讲不通，差不多的内容为 Android 官方的 [Data Binding](http://developer.android.com/tools/data-binding/guide.html)实现绑定后就不用再写什么 findViewById 了。
+
+这个库背后的原理是提供了一个 Observable 当我们所感兴趣的事件发生时被启动。例如，我们对 FAB 的点击事件比较感兴趣：
+
+```java
+RxView.clicks(fab).subscribe(aVoid -> onFabClicked());
+```
+
+类似的还有 `RxToolbar,itemClicks()`,`RxView.navigationClicks()`。随着库的更新，所支持的也会越来越多。
+
+最后我们来个更常用的例子，也就是监听 EditText 的输入，并对每一次输入前，时，后做出相应的处理。
+
+```java
+usualApproachEditText.addTextChangedListener(new TextWatcher() {
+  @Override
+  public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+  @Override
+  public void onTextChanged(CharSequence s, int start, int before, int count) {
+    onNewTextChanged(s);
+  }
+
+  @Override
+  public void afterTextChanged(Editable s) {}
+});
+```
+
+```java
+RxTextView.textChanges(reactiveApproachEditText).subscribe(this::onNewTextChanged);
+```
+
+## Custom Operators
+这部分又回到 RxJava 了。在 RxJava 里总共有两类：一种称之为 Sequence Operators,影响原始 Observable 发送的数据，通过使用 `lift()` 来实现。另一种则是像 RxLifecycle 这类改变 Observable 自身，我们称之为 Transformational Operators，通过使用 `compose()` 来实现。自定义 Operators 有比较大的风险，所以这部分只是为了<b>理解</b> Operators。
+
+看下 Operator 接口的定义，我们会发现实际上是输入一个 subscriber<T> 并返回一个 subscriber<R>，即：我们可以很容易的改变 Observable 发出的数据，但这里有一个坑——需要创建自定义的 Operator，而这又可能造成 subscription 链的断裂和 [back pressure](https://github.com/ReactiveX/RxJava/wiki/Backpressure) 问题。
+
+自定义 Sequence Operators 的第一步要继承 Observable.Operator 类，在这个类的 `call()` 方法返回一个新的 Subscriber。
+
+```java
+public class SequenceOperator implements Observable.Operator<Integer, Integer> {
+  @Override
+  public Subscriber<? super Integer> call(Subscriber<? super Integer> subscriber) {
+    return new Subscriber<Integer>(subscriber) {
+        @Override
+        public void onCompleted() {
+          subscriber.onCompleted();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+          subscriber.onError(e);
+        }
+
+        @Override
+        public void onNext(Integer integer) {
+          int roundedSqrt = (int) Math.round(Math.sqrt(integer));
+          subscriber.onNext(roundedSqrt);
+        }
+    };
+  }
+}
+```
+
+自定义 Transformational Operators，将影响 Observable 整个部分。需实现 Transformer 接口，运行到我们想要的线程上，最后返回结果。
+
+```java
+public class ObservableTransformer<T> implements Observable.Transformer<T, T> {
+  @Override
+  public Observable<T> call(Observable<T> observable) {
+    return observable.subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread());
+    }
+}
+```
+
+最后，检验下我们实现的。
+
+```java
+Observable.just(txtNumber.getText())
+    .delay(5, TimeUnit.SECONDS)
+    .map(editable -> Integer.parseInt(editable.toString()))
+    .lift(new SequenceOperator())
+    .map(sqrt -> String.format(“SQRT is %d”, sqrt))
+    .compose(new ObservableTransformer<>())
+    .subscribe(s -> txtResponse.setText(s),
+    throwable -> txtResponse.setText(throwable.getMessage()));
+```
+
+## Subjects
+总算是有点内容了。到目前为止，我们已经知道一个 Subscriber 可以监听一个 Observable，并对其发出的数据接收和处理。但是，但是如果我们想让他们绑在一起呢？像一条管道，一端为 Observable，另一端为 Subscriber，这个就是我们将要讲的 Subject。
+
+使用 Subject 可以很好的解决之前提到的 subscription 当 Activity 的生命周期发生变化时无法即使保存，也就是，我们可以使用一个 Subject 在 `onCreate()` 阶段 subscribe 我们的 Observable，然后安全的存储这个 Subject，以至于能在设备发生旋转的过程中存活下来，然后能在 `onResume()` 阶段重新接上正确的 Subscriber，这样就能得到结果。
+
+```java
+@Override
+public void onCreate(@Nullable Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setRetainInstance(true);
+
+  Observable<Integer> source = Observable.interval(1, TimeUnit.SECONDS)
+      .map(Long::intValue)
+      .take(20);
+
+  subscription = source.subscribe(subject);
+}
+
+@Override
+public void onResume() {
+  super.onResume();
+  listener.onObservableRetrieved(subject.asObservable());
+}
+```
+
+下面介绍几种 subject，在不同的应用场景下使用相应的 subject。
+
+### AsyncSubject
+[AsyncSubject](http://reactivex.io/RxJava/javadoc/rx/subjects/AsyncSubject.html) 它将发送原始 Observable 最后一次的结果（再强调一边：只是最后一次的值），并且是在原始 Observable 结束后。如果 Observable 没有发送任何数据， AsyncSubject 也能正常结束。也就是，这个 Subject 不在意接收到多少数据，在意的只是在结束前发送的最后一次数据。当我们之是在意最后一次的结果的话可以使用。
+
+![AsyncSubject](/assets/2016-05/AsyncSubject.png)
+
+### ReplaySubject
+[ReplaySubject](http://reactivex.io/RxJava/javadoc/rx/subjects/ReplaySubject.html) 是一种最简单的 Subject，它将 Observable 的数据所有发送给所有 Subscriber 无论先后。不会错过任何信息！
+
+![ReplaySubject](/assets/2016-05/ReplaySubject.png)
+
+### BehaviorSubject
+使用 [BehaviorSubject](http://reactivex.io/RxJava/javadoc/rx/subjects/BehaviorSubject.html)，每个 Subscriber 能接收到完成 subscribe 前最近的一次数据。
+
+![BehaviorSubject](/assets/2016-05/BehaviorSubject.png)
+
+### PublishSubject
+[PublishSubject](http://reactivex.io/RxJava/javadoc/rx/subjects/PublishSubject.html) 和 BehaviorSubject 挺相似的，不过只能接收完成 subscribe 后的数据。
+
+![PublishSubject](/assets/2016-05/PublishSubject.png)
 
 ## 总结
 如果你对 RxJava 想进一步了解，推荐看下
