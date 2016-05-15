@@ -342,7 +342,7 @@ RxTextView.textChanges(reactiveApproachEditText).subscribe(this::onNewTextChange
 ## Custom Operators
 这部分又回到 RxJava 了。在 RxJava 里总共有两类：一种称之为 Sequence Operators,影响原始 Observable 发送的数据，通过使用 `lift()` 来实现。另一种则是像 RxLifecycle 这类改变 Observable 自身，我们称之为 Transformational Operators，通过使用 `compose()` 来实现。自定义 Operators 有比较大的风险，所以这部分只是为了<b>理解</b> Operators。
 
-看下 Operator 接口的定义，我们会发现实际上是输入一个 subscriber<T> 并返回一个 subscriber<R>，即：我们可以很容易的改变 Observable 发出的数据，但这里有一个坑——需要创建自定义的 Operator，而这又可能造成 subscription 链的断裂和 [back pressure](https://github.com/ReactiveX/RxJava/wiki/Backpressure) 问题。
+看下 Operator 接口的定义，我们会发现实际上是输入一个 subscriber<T> 并返回一个 subscriber<R>，即：我们可以很容易的改变 Observable 发出的数据，但这里有一个坑——需要创建自定义的 Operator，而这又可能造成 subscription 链的断裂和 <a href="https://github.com/ReactiveX/RxJava/wiki/Backpressure">back pressure</a> 问题。
 
 自定义 Sequence Operators 的第一步要继承 Observable.Operator 类，在这个类的 `call()` 方法返回一个新的 Subscriber。
 
