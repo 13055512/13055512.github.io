@@ -1,6 +1,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="theme-color" content="#3B4E56">
+  <meta name="author" content="JiangChen">
+  <meta name="description" content=" {{ page.title }}
+  {% for tag in post.tags %}
+  |{{ tag }}
+  {% endfor %}
+  ">
+  <meta name="HandheldFriendly" content="true">
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="/css/materialize.my.css"  media="screen,projection"/>
