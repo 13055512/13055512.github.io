@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "io.github.guang2.template.demo",
+               "sha256_cert_fingerprints": ["32:17:89:63:A9:BB:ED:5F:DD:3F:0B:4D:16:07:54:D7:A0:9F:58:F1:0A:8C:4B:E1:95:8D:74:C4:DE:01:3D:2A"] }
+}]
